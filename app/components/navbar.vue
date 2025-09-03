@@ -1,15 +1,32 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const authRedirect = btoa(`${useRequestURL().origin}/api/auth`);
+const { data: userData } = await useAsyncData(
+  "user",
+  () => $fetch("/api/auth/me").catch(() => null),
+);
+
+const loggedIn = computed(() => !!userData.value?.user);
+const username = computed(() =>
+  (userData.value?.user as { username: string }).username || ""
+);
+</script>
 <template>
   <nav>
     <NuxtLink to="/"><img
         src="/scratchbox-logo-full.svg"
         alt="ScratchBox"
       /></NuxtLink>
-    <NuxtLink to="/upload">Upload</NuxtLink>
     <NuxtLink to="/explore">Explore</NuxtLink>
     <input type="search" placeholder="Search..." />
-    <NuxtLink to="/mystuff">My Projects</NuxtLink>
-    <NuxtLink to="/account">Account (placeholder)</NuxtLink>
+    <template v-if="loggedIn">
+      <NuxtLink to="/upload">Upload</NuxtLink>
+      <NuxtLink to="/mystuff">My Projects</NuxtLink>
+      <a href="/api/auth/logout">Log Out</a>
+    </template>
+    <NuxtLink
+      :to="`https://auth.itinerary.eu.org/auth/?redirect=${authRedirect}&name=ScratchBox`"
+      v-else
+    >Log In</NuxtLink>
   </nav>
 </template>
 <style>

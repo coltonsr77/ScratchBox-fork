@@ -4,4 +4,4 @@
 
 ---
 
-A WIP project thingy for Scratch Everywhere!
+A WIP project hosting/distribution platform for Scratch Everywhere!

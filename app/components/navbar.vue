@@ -1,7 +1,10 @@
 <script setup lang="ts"></script>
 <template>
   <nav>
-    <NuxtLink to="/"><img src="" alt="ScratchBox" /></NuxtLink>
+    <NuxtLink to="/"><img
+        src="/scratchbox-logo-full.svg"
+        alt="ScratchBox"
+      /></NuxtLink>
     <NuxtLink to="/upload">Upload</NuxtLink>
     <NuxtLink to="/explore">Explore</NuxtLink>
     <input type="search" placeholder="Search..." />
@@ -15,6 +18,10 @@ nav {
   background: #f9aa37;
   height: 4rem;
   justify-content: center;
+
+  & img {
+    height: 100%;
+  }
 
   & * {
     color: #fff;

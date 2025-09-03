@@ -1,8 +1,12 @@
 <script setup lang="ts">
 const authRedirect = btoa(`${useRequestURL().origin}/api/auth`);
+
 const { data: userData } = await useAsyncData(
   "user",
-  () => $fetch("/api/auth/me").catch(() => null),
+  () =>
+    $fetch("/api/auth/me", {
+      headers: useRequestHeaders(["cookie"]),
+    }).catch(() => null),
 );
 
 const loggedIn = computed(() => !!userData.value?.user);

@@ -8,7 +8,7 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
 
 # Roadmap
 
-- [ ] Auth with Scratch Auth
+- [x] Auth with Scratch Auth
 - [ ] Project uploads
 - [ ] Account management
 - [ ] Project info (descriptions, versions, tags, platform support)

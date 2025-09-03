@@ -26,6 +26,7 @@ nav {
   & * {
     color: #fff;
     font-weight: bold;
+    font-size: 1rem;
   }
 
   & > a {

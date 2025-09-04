@@ -16,6 +16,7 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
 - [ ] Project info
   - [x] Description
   - [ ] Platform Support
+  - [ ] Thumbnail
   - [ ] Edit
 - [ ] Multi-`.sb3` projects (for each platform)
 - [ ] API

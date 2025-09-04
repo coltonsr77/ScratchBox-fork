@@ -24,3 +24,4 @@ logs
 
 # Database
 *.db
+server/database/migrations/meta/

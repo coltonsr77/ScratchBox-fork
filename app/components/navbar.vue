@@ -13,6 +13,14 @@ const loggedIn = computed(() => !!userData.value?.user);
 const username = computed(() =>
   (userData.value?.user as { username: string }).username || ""
 );
+
+const upload = useTemplateRef("upload") as Ref<HTMLInputElement>;
+const { handleFileInput, files } = useFileStorage({ clearOldFiles: false });
+
+const onUpload = async (e: Event) => {
+  await handleFileInput(e);
+  await $fetch("/api/upload", { method: "POST", body: files.value[0] });
+};
 </script>
 <template>
   <nav>
@@ -23,9 +31,16 @@ const username = computed(() =>
     <NuxtLink to="/explore">Explore</NuxtLink>
     <input type="search" placeholder="Search..." />
     <template v-if="loggedIn">
-      <NuxtLink to="/upload">Upload</NuxtLink>
+      <a href="javascript:void(0);" @click="upload.click()">Upload</a>
       <NuxtLink to="/mystuff">My Projects</NuxtLink>
       <a href="/api/auth/logout">Log Out</a>
+      <input
+        type="file"
+        hidden
+        ref="upload"
+        accept=".sb3"
+        @input="onUpload"
+      />
     </template>
     <NuxtLink
       :to="`https://auth.itinerary.eu.org/auth/?redirect=${authRedirect}&name=ScratchBox`"

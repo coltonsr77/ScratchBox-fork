@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  modules: ["@nuxt/fonts", "@nuxt/icon", "@nuxt/image"],
+  modules: ["@nuxt/fonts", "@nuxt/icon", "@nuxt/image", "nuxt-file-storage"],
   app: {
     head: {
       link: [{
@@ -14,5 +14,8 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     jwtSecret: process.env.JWT_SECRET,
+  },
+  fileStorage: {
+    mount: process.env.MOUNT,
   },
 });

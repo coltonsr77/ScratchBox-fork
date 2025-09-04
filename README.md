@@ -28,6 +28,6 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
 - [ ] Support for (hosting) custom extensions
 - [ ] Private projects
 - [ ] Project interactions
-  - [ ] Likes
+  - [x] Likes
   - [ ] Reports
   - [ ] Comments

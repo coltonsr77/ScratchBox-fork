@@ -9,8 +9,10 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
 # Roadmap
 
 - [x] Auth with Scratch Auth
-- [ ] Project uploads
-- [ ] Account management
+- [x] Project uploads
+- [ ] Remember Projects (Database)
+- [ ] Project Pages
+- [ ] Account management/profiles
 - [ ] Project info (descriptions, versions, tags, platform support)
 - [ ] Multi-`.sb3` projects (for each platform)
 - [ ] API for downloading and fetching project info

@@ -25,8 +25,8 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
 - [ ] Searching
   - [ ] Basic text search
   - [ ] Platform/tag search
+  - [ ] Hide Private Projects
 - [ ] Support for (hosting) custom extensions
-- [ ] Private projects
 - [ ] Project interactions
   - [x] Likes
   - [ ] Reports

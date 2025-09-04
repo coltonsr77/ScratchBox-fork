@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
     `https://auth.itinerary.eu.org/api/auth/verifyToken?privateCode=${
       getQuery(event).privateCode
     }`,
-  ) as {
+  ) as unknown as {
     valid: true | false;
     username: string;
     type?: "instant";

@@ -41,7 +41,6 @@ export default defineEventHandler(async (event) => {
     createdAt: new Date(),
     private: true,
     user: (decoded as { username: string }).username,
-    likes: 0,
   });
 
   return projectId;

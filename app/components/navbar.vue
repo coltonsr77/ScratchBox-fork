@@ -37,7 +37,7 @@ const onUpload = async (e: Event) => {
     <input type="search" placeholder="Search..." />
     <template v-if="loggedIn">
       <a href="javascript:void(0);" @click="upload.click()">Upload</a>
-      <NuxtLink to="/mystuff">My Projects</NuxtLink>
+      <NuxtLink :to="`/user/${username}`">My Profile</NuxtLink>
       <a href="/api/auth/logout">Log Out</a>
       <input
         type="file"

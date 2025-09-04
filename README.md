@@ -11,9 +11,12 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
 - [x] Auth with Scratch Auth
 - [x] Project uploads
 - [x] Remember projects (Database)
-- [ ] Project pages
+- [] Project pages
 - [ ] Account profiles
-- [ ] Project info (descriptions, versions, tags, platform support)
+- [ ] Project info
+  - [x] Description
+  - [ ] Platform Support
+  - [ ] Edit
 - [ ] Multi-`.sb3` projects (for each platform)
 - [ ] API
   - [ ] Downloading

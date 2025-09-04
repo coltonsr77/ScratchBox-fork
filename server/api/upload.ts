@@ -1,7 +1,7 @@
 import { ServerFile } from "nuxt-file-storage";
 import { db } from "../utils/drizzle";
 import * as schema from "../database/schema";
-import jwt, { decode, JwtPayload } from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 export default defineEventHandler(async (event) => {
   const token = getCookie(event, "SB_TOKEN");

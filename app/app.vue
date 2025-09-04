@@ -13,5 +13,11 @@
 body, html {
   width: 100vw;
   height: 100vh;
+  background: #eee;
+}
+
+a {
+  color: #f9aa37;
+  font-weight: bold;
 }
 </style>

@@ -19,7 +19,12 @@ const { handleFileInput, files } = useFileStorage({ clearOldFiles: false });
 
 const onUpload = async (e: Event) => {
   await handleFileInput(e);
-  await $fetch("/api/upload", { method: "POST", body: files.value[0] });
+  await navigateTo(
+    `/project/${await $fetch("/api/upload", {
+      method: "POST",
+      body: files.value[0],
+    })}`,
+  );
 };
 </script>
 <template>

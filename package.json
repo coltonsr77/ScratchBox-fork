@@ -13,6 +13,8 @@
     "@nuxt/fonts": "0.11.4",
     "@nuxt/icon": "2.0.0",
     "@nuxt/image": "1.11.0",
+    "better-sqlite3": "^12.2.0",
+    "drizzle-orm": "^0.44.5",
     "jsonwebtoken": "^9.0.2",
     "nuxt": "^4.0.3",
     "nuxt-file-storage": "^0.3.0",
@@ -20,6 +22,8 @@
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
-    "@types/jsonwebtoken": "^9.0.10"
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/jsonwebtoken": "^9.0.10",
+    "drizzle-kit": "^0.31.4"
   }
 }

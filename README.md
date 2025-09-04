@@ -10,7 +10,7 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
 
 - [x] Auth with Scratch Auth
 - [x] Project uploads
-- [ ] Remember projects (Database)
+- [x] Remember projects (Database)
 - [ ] Project pages
 - [ ] Account profiles
 - [ ] Project info (descriptions, versions, tags, platform support)

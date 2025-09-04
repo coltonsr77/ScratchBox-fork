@@ -44,6 +44,7 @@ const onUpload = async (e: Event) => {
     </template>
     <NuxtLink
       :to="`https://auth.itinerary.eu.org/auth/?redirect=${authRedirect}&name=ScratchBox`"
+      target="_blank"
       v-else
     >Log In</NuxtLink>
   </nav>

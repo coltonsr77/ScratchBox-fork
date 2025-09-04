@@ -30,5 +30,5 @@ export default defineEventHandler(async (event) => {
       },
     );
   }
-  sendRedirect(event, "/", 303);
+  sendRedirect(event, "/postauth", 303);
 });

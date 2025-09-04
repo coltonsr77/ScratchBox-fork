@@ -10,15 +10,20 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
 
 - [x] Auth with Scratch Auth
 - [x] Project uploads
-- [ ] Remember Projects (Database)
-- [ ] Project Pages
+- [ ] Remember projects (Database)
+- [ ] Project pages
 - [ ] Account profiles
 - [ ] Project info (descriptions, versions, tags, platform support)
 - [ ] Multi-`.sb3` projects (for each platform)
-- [ ] API for downloading and fetching project info
+- [ ] API
+  - [ ] Downloading
+  - [ ] Fetching pproject info
 - [ ] Searching
   - [ ] Basic text search
   - [ ] Platform/tag search
-- [ ] Support for custom extensions
-- [ ] Private Projects
-- [ ] Project Interactions (Reporting, Likes)
+- [ ] Support for (hosting) custom extensions
+- [ ] Private projects
+- [ ] Project interactions
+  - [ ] Likes
+  - [ ] Reports
+  - [ ] Comments

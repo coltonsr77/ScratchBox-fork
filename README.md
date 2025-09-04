@@ -31,3 +31,4 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
   - [x] Likes
   - [ ] Reports
   - [ ] Comments
+- [ ] Mobile/Small Screen Support

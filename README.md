@@ -12,10 +12,13 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
 - [x] Project uploads
 - [ ] Remember Projects (Database)
 - [ ] Project Pages
-- [ ] Account management/profiles
+- [ ] Account profiles
 - [ ] Project info (descriptions, versions, tags, platform support)
 - [ ] Multi-`.sb3` projects (for each platform)
 - [ ] API for downloading and fetching project info
 - [ ] Searching
   - [ ] Basic text search
   - [ ] Platform/tag search
+- [ ] Support for custom extensions
+- [ ] Private Projects
+- [ ] Project Interactions (Reporting, Likes)

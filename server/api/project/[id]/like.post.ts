@@ -1,6 +1,7 @@
 import { db } from "../../../utils/drizzle";
 import * as schema from "../../../database/schema";
 import jwt, { JwtPayload } from "jsonwebtoken";
+import { eq } from "drizzle-orm";
 
 export default defineEventHandler(async (event) => {
   const token = getCookie(event, "SB_TOKEN");
@@ -22,9 +23,22 @@ export default defineEventHandler(async (event) => {
     });
   }
 
+  const projectId = getRouterParam(event, "id") as string;
+
+  if (
+    (await db.select().from(schema.projects).where(
+      eq(schema.projects.id, projectId),
+    ))[0].user == (decoded as { username: string }).username
+  ) {
+    throw createError({
+      statusCode: 403,
+      statusMessage: "Can't like your own post",
+    });
+  }
+
   try {
     await db.insert(schema.projectLikes).values({
-      projectId: getRouterParam(event, "id") as string,
+      projectId,
       user: (decoded as { username: string }).username,
     });
 

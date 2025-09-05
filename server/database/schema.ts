@@ -20,3 +20,10 @@ export const projectLikes = sqliteTable("project_likes", {
 }, (t) => [
   primaryKey({ columns: [t.projectId, t.user] }),
 ]);
+
+export const projectPlatforms = sqliteTable("project_platforms", {
+  projectId: text("project_id").notNull().references(() => projects.id),
+  platform: text("platform").notNull(),
+}, (t) => [
+  primaryKey({ columns: [t.projectId, t.platform] }),
+]);

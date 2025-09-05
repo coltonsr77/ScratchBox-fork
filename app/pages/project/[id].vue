@@ -9,6 +9,16 @@ const { data: project } = await useFetch<
     private: boolean;
     user: string;
     likes: number;
+    platforms: (
+      | "scratch"
+      | "turbowarp"
+      | "wii"
+      | "wiiu"
+      | "vita"
+      | "gamecube"
+      | "switch"
+      | "3ds"
+    )[];
   }
 >(`/api/project/${projectId}`);
 const profilePicture = await $fetch(`/api/pfp/${project.value?.user}`);
@@ -18,6 +28,20 @@ const { data: liked } = await useFetch<boolean>(
     headers: useRequestHeaders(["cookie"]),
   },
 );
+
+const platformsMap = {
+  "scratch": "Scratch",
+  "turbowarp": "TurboWarp",
+  "3ds": "3DS",
+  "wiiu": "Wii U",
+  "switch": "Switch",
+  "wii": "Wii",
+  "gamecube": "GameCube",
+  "vita": "Vita",
+};
+const platforms = project.value?.platforms.toSorted((a, b) =>
+  Object.keys(platformsMap).indexOf(a) - Object.keys(platformsMap).indexOf(b)
+).map((platform) => platformsMap[platform]);
 
 const onLike = async () => {
   await $fetch(`/api/project/${projectId}/like`, {
@@ -39,6 +63,9 @@ useHead({
   <div class="project-section">
     <div class="left">
       <h1>{{ project?.name }}</h1>
+      <div class="platforms">
+        <p v-for="platform in platforms">{{ platform }}</p>
+      </div>
       <p>
         <img :src="profilePicture"> By <NuxtLink
           :to="`/user/${project?.user}`"
@@ -77,6 +104,20 @@ body.project-page main {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    width: 50%;
+
+    & .platforms {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+
+      & p {
+        background: #dfdfdf;
+        padding: 0.5rem 1rem;
+        gap: 1rem;
+        border-radius: 2rem;
+      }
+    }
 
     & > img {
       border-radius: 1rem;

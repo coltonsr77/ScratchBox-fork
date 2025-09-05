@@ -21,5 +21,9 @@ export default defineEventHandler(async (event) => {
     likes: (await db.select({ count: count() }).from(schema.projectLikes).where(
       eq(schema.projectLikes.projectId, projectId),
     ))[0].count,
+    platforms:
+      (await db.select().from(schema.projectPlatforms).where(
+        eq(schema.projectPlatforms.projectId, projectId),
+      )).map((projectPlatform) => projectPlatform.platform),
   };
 });

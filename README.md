@@ -15,8 +15,8 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
 - [ ] Account profiles
 - [ ] Project info
   - [x] Description
-  - [ ] Platform Support
-  - [ ] Required extensions
+  - [x] Platform Support
+  - [ ] Required extensions (Once implemented in SE!)
   - [ ] Thumbnail
   - [ ] Edit
 - [ ] Multi-`.sb3` projects (for each platform)
@@ -29,7 +29,7 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
   - [ ] Basic text search
   - [ ] Platform/tag search
   - [ ] Hide Private Projects
-- [ ] Support for (hosting) custom extensions
+- [ ] Support for (hosting) custom extensions (Once implemented in SE!)
 - [ ] Project interactions
   - [x] Likes
   - [ ] Reports

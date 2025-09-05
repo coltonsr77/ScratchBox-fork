@@ -121,7 +121,7 @@ useHead({
         ref="nameInput"
         rows="1"
       />
-      <div class="platforms" v-if="platforms?.length > 0">
+      <div class="platforms" v-if="platforms?.length > 0 || editing">
         <p
           v-for="(name, platform) in platformsMap"
           v-show="platforms.includes(platform) || editing"

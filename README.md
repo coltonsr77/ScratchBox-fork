@@ -35,3 +35,4 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
   - [ ] Reports
   - [ ] Comments
 - [ ] Mobile/Small Screen Support
+- [ ] Easy configuration and customizability

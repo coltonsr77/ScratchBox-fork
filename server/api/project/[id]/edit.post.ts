@@ -51,12 +51,16 @@ export default defineEventHandler(async (event) => {
         | "gamecube"
         | "vita"
       )[];
+      private: boolean;
     }
   >(event);
+
+  console.log(body.private);
 
   await db.update(schema.projects).set({
     description: body.description,
     name: body.name,
+    private: body.private,
   }).where(
     eq(schema.projects.id, projectId),
   );

@@ -45,6 +45,13 @@ watch(project, (newProject) => {
   }
 }, { immediate: true });
 
+const isPrivate = ref(true);
+watch(project, (newProject) => {
+  if (newProject?.private !== undefined) {
+    isPrivate.value = newProject.private;
+  }
+}, { immediate: true });
+
 const platforms = reactive(
   (project.value?.platforms as (keyof typeof platformsMap)[])
     .toSorted((a, b) =>
@@ -99,6 +106,7 @@ const save = async () => {
       name: name.value,
       description: description.value,
       platforms: platforms,
+      private: isPrivate.value,
     },
   });
   editing.value = false;
@@ -146,9 +154,16 @@ useHead({
           <button v-if="!editing" @click="editing = true">
             <Icon name="ri:edit-line" /> Edit
           </button>
-          <button v-else @click="save">
-            <Icon name="ri:save-line" /> Save
-          </button>
+          <template v-else>
+            <button @click="isPrivate = !isPrivate" class="private">
+              <Icon name="ri:user-line" /> {{
+                isPrivate ? "Make Public" : "Make Private"
+              }}
+            </button>
+            <button @click="save">
+              <Icon name="ri:save-line" /> Save
+            </button>
+          </template>
         </template>
       </p>
       <img src="/default-thumbnail.png" />
@@ -240,6 +255,10 @@ body.project-page main {
         top: 50%;
         translate: 0 -50%;
         height: 2rem;
+      }
+
+      & .private {
+        right: 5rem;
       }
     }
 

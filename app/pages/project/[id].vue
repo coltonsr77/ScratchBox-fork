@@ -54,6 +54,10 @@ useHead({
           project?.likes
         }}
       </button>
+      <a class="download" :href="`/api/project/${projectId}/download`" download>
+        <Icon name="ri:download-line" />
+        Download
+      </a>
     </div>
   </div>
 </template>
@@ -101,7 +105,7 @@ body.project-page main {
       margin-bottom: 1rem;
     }
 
-    & button {
+    & button, & a.download {
       background: #f9aa37;
       color: #fff;
       border: none;
@@ -109,13 +113,18 @@ body.project-page main {
       padding: 0.5rem;
       border-radius: 1rem;
       display: flex;
-      gap: 1rem;
+      gap: 0.5rem;
       cursor: pointer;
+      position: absolute;
+      bottom: 1rem;
+      text-decoration: none;
 
       &.likes {
-        position: absolute;
         left: 1rem;
-        bottom: 1rem;
+      }
+
+      &.download {
+        right: 1rem;
       }
     }
   }

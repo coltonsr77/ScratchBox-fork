@@ -21,8 +21,10 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
   - [ ] Edit
 - [ ] Multi-`.sb3` projects (for each platform)
 - [ ] API
-  - [ ] Downloading
+  - [x] Downloading
   - [x] Fetching project info
+  - [ ] Search
+  - [ ] Fetching user info
 - [ ] Searching
   - [ ] Basic text search
   - [ ] Platform/tag search

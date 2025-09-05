@@ -1,18 +1,7 @@
 <script setup lang="ts">
 const authRedirect = btoa(`${useRequestURL().origin}/api/auth`);
 
-const { data: userData } = await useAsyncData(
-  "user",
-  () =>
-    $fetch("/api/auth/me", {
-      headers: useRequestHeaders(["cookie"]),
-    }).catch(() => null),
-);
-
-const loggedIn = computed(() => !!userData.value?.user);
-const username = computed(() =>
-  (userData.value?.user as { username: string }).username || ""
-);
+const user = await useCurrentUser();
 
 const upload = useTemplateRef("upload") as Ref<HTMLInputElement>;
 const { handleFileInput, files } = useFileStorage({ clearOldFiles: false });
@@ -35,9 +24,9 @@ const onUpload = async (e: Event) => {
       /></NuxtLink>
     <NuxtLink to="/explore">Explore</NuxtLink>
     <input type="search" placeholder="Search..." />
-    <template v-if="loggedIn">
+    <template v-if="user.loggedIn">
       <a href="javascript:void(0);" @click="upload.click()">Upload</a>
-      <NuxtLink :to="`/user/${username}`">My Profile</NuxtLink>
+      <NuxtLink :to="`/user/${user.username}`">My Profile</NuxtLink>
       <a href="/api/auth/logout">Log Out</a>
       <input
         type="file"

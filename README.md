@@ -18,7 +18,7 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
   - [x] Platform Support
   - [ ] Required extensions (Once implemented in SE!)
   - [ ] Thumbnail
-  - [ ] Edit
+  - [x] Edit
 - [ ] Multi-`.sb3` projects (for each platform)
 - [ ] API
   - [x] Downloading

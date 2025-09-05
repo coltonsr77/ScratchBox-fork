@@ -1,34 +1,4 @@
 <script setup lang="ts">
-const projectId = useRoute().params.id;
-const { data: project } = await useFetch<
-  {
-    id: string;
-    name: string;
-    description: string;
-    createdAt: Date;
-    private: boolean;
-    user: string;
-    likes: number;
-    platforms: (
-      | "scratch"
-      | "turbowarp"
-      | "wii"
-      | "wiiu"
-      | "vita"
-      | "gamecube"
-      | "switch"
-      | "3ds"
-    )[];
-  }
->(`/api/project/${projectId}`);
-const profilePicture = await $fetch(`/api/pfp/${project.value?.user}`);
-const { data: liked } = await useFetch<boolean>(
-  `/api/project/${projectId}/liked`,
-  {
-    headers: useRequestHeaders(["cookie"]),
-  },
-);
-
 const platformsMap = {
   "scratch": "Scratch",
   "turbowarp": "TurboWarp",
@@ -39,9 +9,34 @@ const platformsMap = {
   "gamecube": "GameCube",
   "vita": "Vita",
 };
-const platforms = project.value?.platforms.toSorted((a, b) =>
-  Object.keys(platformsMap).indexOf(a) - Object.keys(platformsMap).indexOf(b)
-).map((platform) => platformsMap[platform]);
+
+const projectId = useRoute().params.id;
+const { data: project } = await useFetch<
+  {
+    id: string;
+    name: string;
+    description: string;
+    createdAt: Date;
+    private: boolean;
+    user: string;
+    likes: number;
+    platforms: typeof platformsMap[keyof typeof platformsMap][];
+  }
+>(`/api/project/${projectId}`);
+const profilePicture = await $fetch(`/api/pfp/${project.value?.user}`);
+const { data: liked } = await useFetch<boolean>(
+  `/api/project/${projectId}/liked`,
+  {
+    headers: useRequestHeaders(["cookie"]),
+  },
+);
+
+const platforms = (project.value?.platforms as (keyof typeof platformsMap)[])
+  .toSorted((a, b) =>
+    Object.keys(platformsMap).indexOf(a) - Object.keys(platformsMap).indexOf(b)
+  ).map((platform) =>
+    platformsMap[platform]
+  ) as typeof platformsMap[keyof typeof platformsMap][];
 
 const onLike = async () => {
   await $fetch(`/api/project/${projectId}/like`, {
@@ -63,7 +58,7 @@ useHead({
   <div class="project-section">
     <div class="left">
       <h1>{{ project?.name }}</h1>
-      <div class="platforms">
+      <div class="platforms" v-if="platforms?.length > 0">
         <p v-for="platform in platforms">{{ platform }}</p>
       </div>
       <p>

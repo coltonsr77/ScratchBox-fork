@@ -114,6 +114,8 @@ export default defineEventHandler(async (event) => {
     );
   }
 
+  if (!body.file) return;
+
   if (!body.file.name.endsWith(".sb3")) {
     throw createError({ statusCode: 415, statusMessage: "Invalid file type" });
   }

@@ -1,0 +1,25 @@
+{
+  "entries": [
+    {
+      "idx": 0,
+      "when": 1757132271284,
+      "tag": "0000_init"
+    },
+    {
+      "idx": 1,
+      "when": 1757132278364,
+      "tag": "0001_init_likes"
+    },
+    {
+      "idx": 2,
+      "when": 1757132283523,
+      "tag": "0002_migrate_to_new_likes"
+    },
+    {
+      "idx": 3,
+      "when": 1757132288393,
+      "tag": "0003_init_platforms"
+    }
+  ]
+}
+

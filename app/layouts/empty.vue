@@ -13,6 +13,7 @@ body.empty {
   display: grid;
   place-content: center;
   background: #f9aa37;
+  height: 100vh;
 
   & * {
     text-align: center;

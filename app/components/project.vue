@@ -7,7 +7,7 @@ const props = defineProps<{ name: string; description: string; id: string }>();
       :data="`/api/project/${props.id}/thumbnail`"
       type="image/png"
     >
-      <img src="/default-thumbnail.png" />
+      <nuxt-img src="/default-thumbnail.png" />
     </object>
     <h2>{{ props.name }}</h2>
     <p v-if='props.description !== ""'>{{ props.description }}</p>

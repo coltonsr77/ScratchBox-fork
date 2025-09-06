@@ -3,7 +3,6 @@ import * as schema from "../../../database/schema";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { and, eq } from "drizzle-orm";
 import { ServerFile } from "nuxt-file-storage";
-import fs from "fs/promises";
 import sharp from "sharp";
 
 export default defineEventHandler(async (event) => {

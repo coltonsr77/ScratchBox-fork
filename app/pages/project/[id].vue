@@ -108,6 +108,14 @@ const addOrRemovePlatform = (platform: keyof typeof platformsMap) => {
   );
 };
 
+const deleteProject = async () => {
+  await $fetch(`/api/project/${projectId}`, {
+    method: "DELETE",
+    headers: useRequestHeaders(["cookie"]),
+  });
+  navigateTo("/");
+};
+
 const save = async () => {
   await $fetch(`/api/project/${projectId}/edit`, {
     method: "POST",
@@ -242,6 +250,9 @@ useHead({
         accept="image/*"
         @input="handleThumbnailFileInput"
       />
+      <button class="delete" v-if="editing" @click="deleteProject">
+        <Icon name="ri:delete-bin-line" /> Delete
+      </button>
     </div>
   </div>
 </template>
@@ -381,12 +392,16 @@ body.project-page main {
       left: 1rem;
     }
 
-    &.download, &.upload, &.thumbnail-upload {
+    &.download, &.upload, &.thumbnail-upload, &.delete {
       right: 1rem;
     }
 
     &.upload {
       bottom: 3.5rem;
+    }
+
+    &.delete {
+      bottom: 6rem;
     }
   }
 }

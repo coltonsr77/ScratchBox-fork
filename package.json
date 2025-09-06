@@ -18,6 +18,7 @@
     "jsonwebtoken": "^9.0.2",
     "nuxt": "^4.0.3",
     "nuxt-file-storage": "^0.3.0",
+    "sharp": "^0.34.3",
     "vue": "^3.5.20",
     "vue-router": "^4.5.1"
   },

@@ -13,11 +13,11 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
 - [x] Remember projects (Database)
 - [x] Project pages
 - [ ] Account profiles
-- [ ] Project info
+- [x] Project info
   - [x] Description
   - [x] Platform Support
   - [ ] Required extensions (Once implemented in SE!)
-  - [ ] Thumbnail
+  - [x] Thumbnail
   - [x] Edit
 - [ ] Multi-`.sb3` projects (for each platform)
 - [ ] API

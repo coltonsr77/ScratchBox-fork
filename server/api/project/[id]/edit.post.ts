@@ -3,6 +3,8 @@ import * as schema from "../../../database/schema";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { and, eq } from "drizzle-orm";
 import { ServerFile } from "nuxt-file-storage";
+import fs from "fs/promises";
+import sharp from "sharp";
 
 export default defineEventHandler(async (event) => {
   const token = getCookie(event, "SB_TOKEN");
@@ -38,7 +40,8 @@ export default defineEventHandler(async (event) => {
 
   const body = await readBody<
     {
-      file: ServerFile;
+      file?: ServerFile;
+      thumbnail?: ServerFile;
       name: string;
       description: string;
       platforms: (
@@ -54,8 +57,6 @@ export default defineEventHandler(async (event) => {
       private: boolean;
     }
   >(event);
-
-  console.log(body.private);
 
   await db.update(schema.projects).set({
     description: body.description,
@@ -118,12 +119,43 @@ export default defineEventHandler(async (event) => {
     );
   }
 
-  if (!body.file) return;
+  if (body.file) {
+    if (!body.file.name.endsWith(".sb3")) {
+      throw createError({
+        statusCode: 415,
+        statusMessage: "Invalid file type",
+      });
+    }
 
-  if (!body.file.name.endsWith(".sb3")) {
-    throw createError({ statusCode: 415, statusMessage: "Invalid file type" });
+    await storeFileLocally(body.file, projectId, "/projects");
   }
 
-  await deleteFile(projectId + ".sb3", "/projects");
-  await storeFileLocally(body.file, projectId, "/projects");
+  if (!body.thumbnail) return;
+
+  const { binaryString: imageBuffer } = parseDataUrl(body.thumbnail.content);
+  if (!imageBuffer) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: "Code not parse thumbnail.",
+    });
+  }
+
+  const processedImageBuffer = await sharp(imageBuffer).resize({
+    width: 408,
+    height: 306,
+  }).png().toBuffer();
+  const processedDataUrl = `data:image/png;base64,${
+    processedImageBuffer.toString("base64")
+  }`;
+
+  await storeFileLocally(
+    {
+      name: projectId + ".png",
+      size: processedImageBuffer.length,
+      type: "image/png",
+      content: processedDataUrl,
+    } as unknown as ServerFile, // There's an issue in the ServerFile type which is why this is needed
+    projectId,
+    "/thumbnails",
+  );
 });

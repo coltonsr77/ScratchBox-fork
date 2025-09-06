@@ -64,8 +64,19 @@ const user = await useCurrentUser();
 
 const editing = ref(false);
 
-const upload = useTemplateRef("upload") as Ref<HTMLInputElement>;
-const { handleFileInput, files } = useFileStorage({ clearOldFiles: true });
+const projectUpload = useTemplateRef("projectUpload") as Ref<HTMLInputElement>;
+const { handleFileInput: handleProjectFileInput, files: projectFiles } =
+  useFileStorage({
+    clearOldFiles: true,
+  });
+
+const thumbnailUpload = useTemplateRef("thumbnailUpload") as Ref<
+  HTMLInputElement
+>;
+const { handleFileInput: handleThumbnailFileInput, files: thumbnailFiles } =
+  useFileStorage({
+    clearOldFiles: true,
+  });
 
 const onLike = async () => {
   await $fetch(`/api/project/${projectId}/like`, {
@@ -102,7 +113,8 @@ const save = async () => {
     method: "POST",
     headers: useRequestHeaders(["cookie"]),
     body: {
-      file: files.value[0],
+      file: projectFiles.value[0],
+      thumbnail: thumbnailFiles.value[0],
       name: name.value,
       description: description.value,
       platforms: platforms,
@@ -166,7 +178,9 @@ useHead({
           </template>
         </template>
       </p>
-      <img src="/default-thumbnail.png" />
+      <object :data="`/api/project/${projectId}/thumbnail`" type="image/png">
+        <img src="/default-thumbnail.png" />
+      </object>
     </div>
     <div class="right">
       <h2>Description</h2>
@@ -180,19 +194,38 @@ useHead({
           project?.likes
         }}
       </button>
-      <a class="download" :href="`/api/project/${projectId}/download`" download>
+      <a
+        class="download"
+        :href="`/api/project/${projectId}/download`"
+        download
+        v-if="!editing"
+      >
         <Icon name="ri:download-line" />
         Download
       </a>
-      <button class="upload" v-if="editing" @click="upload.click()">
+      <button class="upload" v-if="editing" @click="projectUpload.click()">
         <Icon name="ri:upload-line" /> Upload
       </button>
       <input
         type="file"
         hidden
-        ref="upload"
+        ref="projectUpload"
         accept=".sb3"
-        @input="handleFileInput"
+        @input="handleProjectFileInput"
+      />
+      <button
+        class="thumbnail-upload"
+        v-if="editing"
+        @click="thumbnailUpload.click()"
+      >
+        <Icon name="ri:image-line" /> Set Thumbnail
+      </button>
+      <input
+        type="file"
+        hidden
+        ref="thumbnailUpload"
+        accept="image/*"
+        @input="handleThumbnailFileInput"
       />
     </div>
   </div>
@@ -234,8 +267,12 @@ body.project-page main {
       }
     }
 
-    & > img {
+    & > object {
       border-radius: 1rem;
+      overflow: hidden;
+      & * {
+        width: 100%;
+      }
     }
 
     & p:has(img) {
@@ -314,7 +351,7 @@ body.project-page main {
       left: 1rem;
     }
 
-    &.download, &.upload {
+    &.download, &.upload, &.thumbnail-upload {
       right: 1rem;
     }
 

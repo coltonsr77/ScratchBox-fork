@@ -135,7 +135,10 @@ useHead({
 });
 </script>
 <template>
-  <div class="project-section">
+  <div
+    class="project-section"
+    :class='{ vertical: platforms.includes("turbowarp") }'
+  >
     <div class="left">
       <textarea
         v-model="name"
@@ -253,6 +256,14 @@ body.project-page main {
   display: flex;
   gap: 2rem;
   padding: 2rem;
+
+  &.vertical {
+    flex-direction: column;
+
+    & .left, & .right {
+      width: 100%;
+    }
+  }
 
   & .left {
     display: flex;

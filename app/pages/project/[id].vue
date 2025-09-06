@@ -263,6 +263,10 @@ body.project-page main {
     & .left, & .right {
       width: 100%;
     }
+
+    & .right textarea {
+      height: 20rem;
+    }
   }
 
   & .left {

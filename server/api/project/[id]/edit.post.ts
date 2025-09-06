@@ -108,7 +108,7 @@ export default defineEventHandler(async (event) => {
       body.platforms.includes(platform) && !currentPlatforms.includes(platform)
     ) {
       await db.insert(schema.projectPlatforms).values({ projectId, platform });
-      return;
+      continue;
     }
 
     await db.delete(schema.projectPlatforms).where(

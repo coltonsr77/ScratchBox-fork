@@ -178,7 +178,15 @@ useHead({
           </template>
         </template>
       </p>
-      <object :data="`/api/project/${projectId}/thumbnail`" type="image/png">
+      <iframe
+        v-if='platforms.includes("turbowarp")'
+        :src="`https://turbowarp.org/embed?project_url=${useRequestURL().host}/api/project/${projectId}/download`"
+      />
+      <object
+        :data="`/api/project/${projectId}/thumbnail`"
+        type="image/png"
+        v-else
+      >
         <img src="/default-thumbnail.png" />
       </object>
     </div>
@@ -267,9 +275,12 @@ body.project-page main {
       }
     }
 
-    & > object {
+    & > object, & > iframe {
       border-radius: 1rem;
       overflow: hidden;
+      aspect-ratio: 480 / 360;
+      border: none;
+
       & * {
         width: 100%;
       }

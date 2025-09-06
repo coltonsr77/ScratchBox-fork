@@ -1,42 +1,40 @@
 <script setup lang="ts">
 const route = useRoute();
-if (route.query.q === undefined || route.query.q === "") {
-  throw createError({ statusCode: 400, statusMessage: "No query" });
-}
-const { data: results, pending } = await useAsyncData(
-  "search-results",
+
+const { data: projects, pending } = await useAsyncData(
+  "explore-results",
   () => {
     return $fetch<
       { name: string; description: string; id: string }[]
     >(
-      `/api/search?q=${route.query.q}&p=${route.query.p || "1"}`,
+      `/api/projects?sort=likes&p=${route.query.p || "1"}`,
     );
   },
   {
-    watch: [() => route.query.q, () => route.query.p],
+    watch: [() => route.query.p],
   },
 );
 
 useHead({
   bodyAttrs: {
-    class: "search-page",
+    class: "explore-page",
   },
 });
 </script>
 <template>
-  <div class="search-content">
+  <div class="explore-content">
     <h1 v-if="pending">Loading...</h1>
-    <h1 v-else-if="results?.length === 0">No results found.</h1>
+    <h1 v-else-if="projects?.length === 0">No results found.</h1>
     <Project
       v-else
-      v-for="result in results"
-      :name="result.name"
+      v-for="project in projects"
+      :name="project.name"
       :description='
-        result.description.length > 75
-          ? result.description.slice(0, 75) + "..."
-          : result.description
+        project.description.length > 75
+          ? project.description.slice(0, 75) + "..."
+          : project.description
       '
-      :id="result.id"
+      :id="project.id"
     />
   </div>
   <div class="page-controls">
@@ -44,8 +42,8 @@ useHead({
       v-if='Number(route.query.p || "1") > 1'
       @click='
         navigateTo({
-          path: "/search",
-          query: { q: route.query.q, p: Number(route.query.p) - 1 },
+          path: "/explore",
+          query: { p: Number(route.query.p) - 1 },
         })
       '
     >
@@ -55,8 +53,8 @@ useHead({
     <button
       @click='
         navigateTo({
-          path: "/search",
-          query: { q: route.query.q, p: Number(route.query.p || "1") + 1 },
+          path: "/explore",
+          query: { p: Number(route.query.p || "1") + 1 },
         })
       '
     >
@@ -65,13 +63,13 @@ useHead({
   </div>
 </template>
 <style>
-body.search-page main {
+body.explore-page main {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.search-content {
+.explore-content {
   width: 65rem;
   display: flex;
   flex-wrap: wrap;

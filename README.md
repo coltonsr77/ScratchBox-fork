@@ -23,12 +23,12 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
 - [ ] API
   - [x] Downloading
   - [x] Fetching project info
-  - [ ] Search
+  - [x] Search
   - [ ] Fetching user info
 - [ ] Searching
-  - [ ] Basic text search
-  - [ ] Platform/tag search
-  - [ ] Hide Private Projects
+  - [x] Basic text search
+  - [ ] Platform/sorted search
+  - [x] Hide Private Projects
 - [ ] Support for (hosting) custom extensions (Once implemented in SE!)
 - [ ] Project interactions
   - [x] Likes

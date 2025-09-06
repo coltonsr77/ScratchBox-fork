@@ -6,6 +6,8 @@ const user = await useCurrentUser();
 const upload = useTemplateRef("upload") as Ref<HTMLInputElement>;
 const { handleFileInput, files } = useFileStorage({ clearOldFiles: false });
 
+const search = ref(useRoute().query.q || "");
+
 const onUpload = async (e: Event) => {
   await handleFileInput(e);
   await navigateTo(
@@ -23,7 +25,12 @@ const onUpload = async (e: Event) => {
         alt="ScratchBox"
       /></NuxtLink>
     <NuxtLink to="/explore">Explore</NuxtLink>
-    <input type="search" placeholder="Search..." />
+    <input
+      type="search"
+      placeholder="Search..."
+      v-model="search"
+      @keyup.enter='navigateTo({ path: "/search", query: { q: search } })'
+    />
     <template v-if="user.loggedIn">
       <a href="javascript:void(0);" @click="upload.click()">Upload</a>
       <NuxtLink :to="`/user/${user.username}`">My Profile</NuxtLink>
@@ -49,6 +56,10 @@ nav {
   background: #f9aa37;
   height: 4rem;
   justify-content: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
 
   & img {
     height: 100%;

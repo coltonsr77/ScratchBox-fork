@@ -12,12 +12,15 @@
 
 body, html {
   width: 100vw;
-  height: 100vh;
   background: #eee;
 }
 
 a {
   color: #f9aa37;
   font-weight: bold;
+}
+
+main {
+  margin-top: 4rem;
 }
 </style>

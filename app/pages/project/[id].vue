@@ -124,6 +124,10 @@ const save = async () => {
   editing.value = false;
 };
 
+onMounted(() => {
+  resizeNameInput();
+});
+
 useHead({
   bodyAttrs: {
     class: "project-page",

@@ -29,6 +29,8 @@ export default defineEventHandler(async (event) => {
       }.sb3"`,
     );
 
+    setHeader(event, "Access-Control-Allow-Origin", "*");
+
     return sendStream(event, createReadStream(filePath));
   } catch {
     throw createError({

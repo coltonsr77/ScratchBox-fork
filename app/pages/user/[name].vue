@@ -25,33 +25,45 @@ useHead({
         projects.private ? "Your" : `${route.params.name}'s`
       }} Profile
     </h1>
-    <h2>Public Projects</h2>
-    <div class="user-projects">
-      <Project
-        v-for="project in projects.public"
-        :name="project.name"
-        :description='
-          project.description.length > 75
-            ? project.description.slice(0, 75) + "..."
-            : project.description
-        '
-        :id="project.id"
-      />
-    </div>
-    <template v-if="projects.private">
-      <h2>Private Projects</h2>
-      <div class="user-projects">
-        <Project
-          v-for="project in projects.private"
-          :name="project.name"
-          :description='
-            project.description.length > 75
-              ? project.description.slice(0, 75) + "..."
-              : project.description
-          '
-          :id="project.id"
-        />
-      </div>
+    <p v-if="projects.private === undefined && projects.public.length === 0">
+      {{ route.params.name }} doesn't have any public projects yet.
+    </p>
+    <p
+      v-else-if="projects.private?.length === 0 && projects.public.length === 0"
+    >
+      You don't have any projects yet.
+    </p>
+    <template v-else>
+      <template v-if="projects.public.length > 0">
+        <h2>Public Projects</h2>
+        <div class="user-projects">
+          <Project
+            v-for="project in projects.public"
+            :name="project.name"
+            :description='
+              project.description.length > 75
+                ? project.description.slice(0, 75) + "..."
+                : project.description
+            '
+            :id="project.id"
+          />
+        </div>
+      </template>
+      <template v-if="projects.private && projects.private.length > 0">
+        <h2>Private Projects</h2>
+        <div class="user-projects">
+          <Project
+            v-for="project in projects.private"
+            :name="project.name"
+            :description='
+              project.description.length > 75
+                ? project.description.slice(0, 75) + "..."
+                : project.description
+            '
+            :id="project.id"
+          />
+        </div>
+      </template>
     </template>
   </div>
 </template>

@@ -23,7 +23,7 @@ const { data: project } = await useFetch<
     platforms: typeof platformsMap[keyof typeof platformsMap][];
   }
 >(`/api/project/${projectId}`);
-const profilePicture = await $fetch(`/api/pfp/${project.value?.user}`);
+const profilePicture = await $fetch(`/api/user/${project.value?.user}/picture`);
 const { data: liked } = await useFetch<boolean>(
   `/api/project/${projectId}/liked`,
   {

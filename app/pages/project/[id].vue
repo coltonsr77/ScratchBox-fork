@@ -281,6 +281,10 @@ body.project-page main {
     & .right textarea {
       height: 20rem;
     }
+
+    & .right > div {
+      margin-bottom: 3rem;
+    }
   }
 
   & .left {

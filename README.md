@@ -12,7 +12,7 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
 - [x] Project uploads
 - [x] Remember projects (Database)
 - [x] Project pages
-- [ ] Account profiles
+- [x] Account profiles
 - [x] Project info
   - [x] Description
   - [x] Platform Support
@@ -20,11 +20,11 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
   - [x] Thumbnail
   - [x] Edit
 - [ ] Multi-`.sb3` projects (for each platform)
-- [ ] API
+- [x] API
   - [x] Downloading
   - [x] Fetching project info
   - [x] Search
-  - [ ] Fetching user info
+  - [x] Fetching user projects
 - [ ] Searching
   - [x] Basic text search
   - [ ] Platform/sorted search

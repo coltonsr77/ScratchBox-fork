@@ -1,26 +1,54 @@
+<script setup lang="ts">
+const { currentTheme } = useTheme();
+
+const themeClass = computed(() => `theme-${currentTheme.value}`);
+
+useHead({
+  bodyAttrs: {
+    class: () => themeClass,
+  },
+});
+</script>
 <template>
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
 </template>
-<style global>
+<style>
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+  color: var(--color-text);
 }
 
 body, html {
   width: 100vw;
-  background: #eee;
+  background: var(--color-background);
 }
 
 a {
-  color: #f9aa37;
+  color: var(--color-primary);
   font-weight: bold;
 }
 
 main {
   margin-top: 4rem;
+}
+
+body.theme-light {
+  --color-background: #eee;
+  --color-secondary-background: #dfdfdf;
+  --color-primary: #f9aa37;
+  --color-primary-text: #fff;
+  --color-text: #000;
+}
+
+body.theme-dark {
+  --color-background: #111;
+  --color-secondary-background: #222;
+  --color-primary: #d19847;
+  --color-primary-text: #fff;
+  --color-text: #ccc;
 }
 </style>

@@ -15,9 +15,9 @@ const props = defineProps<{ name: string; description: string; id: string }>();
 </template>
 <style>
 .project-card {
-  background: #dfdfdf;
+  background: var(--color-secondary-background);
   width: calc(65rem / 3 - 1rem * 3);
-  color: #000;
+  color: var(--color-text);
   font-weight: unset;
   text-decoration: none;
   padding: 1rem;

@@ -83,14 +83,16 @@ body.search-page main {
   display: flex;
   gap: 1rem;
   align-items: center;
+  font-weight: bold;
 
   & button {
-    background: #f9aa37;
+    background: var(--color-primary);
     border: none;
-    color: #fff;
+    color: var(--color-primary-text);
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     cursor: pointer;
+    font-weight: bold;
   }
 }
 </style>

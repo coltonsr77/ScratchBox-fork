@@ -8,6 +8,8 @@ const { handleFileInput, files } = useFileStorage({ clearOldFiles: false });
 
 const search = ref(useRoute().query.q || "");
 
+const { currentTheme, toggleTheme } = useTheme();
+
 const onUpload = async (e: Event) => {
   await handleFileInput(e);
   await navigateTo(
@@ -23,7 +25,14 @@ const onUpload = async (e: Event) => {
     <NuxtLink to="/"><img
         src="/scratchbox-logo-full.svg"
         alt="ScratchBox"
-      /></NuxtLink>
+      />
+    </NuxtLink>
+    <ClientOnly>
+      <a href="javascript:void(0);" @click="toggleTheme">
+        <Icon v-if='currentTheme === "light"' name="ri:moon-fill" />
+        <Icon v-else name="ri:sun-line" />
+      </a>
+    </ClientOnly>
     <NuxtLink to="/explore">Explore</NuxtLink>
     <input
       type="search"
@@ -53,7 +62,7 @@ const onUpload = async (e: Event) => {
 <style>
 nav {
   display: flex;
-  background: #f9aa37;
+  background: var(--color-primary);
   height: 4rem;
   justify-content: center;
   position: fixed;
@@ -66,7 +75,7 @@ nav {
   }
 
   & * {
-    color: #fff;
+    color: var(--color-primary-text);
     font-weight: bold;
     font-size: 1rem;
   }

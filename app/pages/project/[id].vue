@@ -292,7 +292,7 @@ body.project-page main {
       flex-wrap: wrap;
 
       & p {
-        background: #dfdfdf;
+        background: var(--color-secondary-background);
         padding: 0.5rem 1rem;
         border-radius: 2rem;
         display: flex;
@@ -343,7 +343,7 @@ body.project-page main {
     & textarea {
       background: none;
       border: none;
-      color: #000;
+      color: var(--color-text);
       font-weight: bold;
       font-size: 2rem;
       cursor: text;
@@ -352,7 +352,7 @@ body.project-page main {
   }
 
   & .right {
-    background: #dfdfdf;
+    background: var(--color-secondary-background);
     padding: 1rem;
     border-radius: 1rem;
     position: relative;
@@ -374,8 +374,7 @@ body.project-page main {
   }
 
   & button, & a.download {
-    background: #f9aa37;
-    color: #fff;
+    background: var(--color-primary);
     border: none;
     font-size: 1rem;
     padding: 0.5rem;
@@ -387,6 +386,10 @@ body.project-page main {
     bottom: 1rem;
     text-decoration: none;
     font-weight: bold;
+
+    &, & * {
+      color: var(--color-primary-text);
+    }
 
     &.likes {
       left: 1rem;

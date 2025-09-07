@@ -10,6 +10,7 @@ export default defineNuxtConfig({
         type: "image/svg+xml",
         href: "/scratchbox-logo-box.svg",
       }],
+      title: "ScratchBox",
     },
   },
   runtimeConfig: {

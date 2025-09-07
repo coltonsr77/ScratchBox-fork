@@ -207,11 +207,14 @@ useHead({
     </div>
     <div class="right">
       <h2>Description</h2>
-      <textarea
-        v-if="project"
-        :disabled="!editing"
-        v-model="description"
-      ></textarea>
+      <template v-if="project">
+        <textarea
+          v-if="editing"
+          :disabled="!editing"
+          v-model="description"
+        />
+        <MarkdownText :markdown="description" v-else />
+      </template>
       <button class="likes" @click="onLike">
         <Icon :name='liked ? "ri:thumb-up-fill" : "ri:thumb-up-line"' /> {{
           project?.likes

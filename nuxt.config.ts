@@ -19,4 +19,7 @@ export default defineNuxtConfig({
   fileStorage: {
     mount: process.env.MOUNT,
   },
+  routeRules: {
+    "/": { redirect: "/explore" },
+  },
 });

@@ -35,7 +35,7 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
   - [ ] Easy way to make people mods/admins
   - [ ] Allow mods to edit project info
     - [ ] Make them give a reason
-- [ ] TOS
+- [x] TOS/Rules
 - [ ] Platform/sorted search
 - [ ] Project Pages
   - [ ] Required extensions (Once implemented in SE!)

@@ -38,6 +38,7 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
   - [x] Markdown Support
 - [x] API for user projects
 - [x] Account profiles
+- [ ] Improved Error Handling
 
 ## Post-Testing
 

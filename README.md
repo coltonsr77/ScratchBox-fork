@@ -29,7 +29,12 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
 
 ## Testing
 
-- [ ] Reports
+- [ ] Moderation
+  - [ ] Reports
+  - [ ] Admin/Mod dashboard
+  - [ ] Easy way to make people mods/admins
+  - [ ] Allow mods to edit project info
+    - [ ] Make them give a reason
 - [ ] TOS
 - [ ] Platform/sorted search
 - [ ] Project Pages

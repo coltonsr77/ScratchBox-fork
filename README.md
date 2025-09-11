@@ -8,31 +8,41 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
 
 # Roadmap
 
+## Pre-Testing
+
 - [x] Auth with Scratch Auth
 - [x] Project uploads
 - [x] Remember projects (Database)
 - [x] Project pages
-- [x] Account profiles
 - [x] Project info
   - [x] Description
   - [x] Platform Support
-  - [ ] Required extensions (Once implemented in SE!)
-  - [x] Thumbnail
   - [x] Edit
-- [ ] Multi-`.sb3` projects (for each platform)
 - [x] API
   - [x] Downloading
   - [x] Fetching project info
   - [x] Search
-  - [x] Fetching user projects
-- [ ] Searching
+- [x] Searching
   - [x] Basic text search
-  - [ ] Platform/sorted search
   - [x] Hide Private Projects
-- [ ] Support for (hosting) custom extensions (Once implemented in SE!)
-- [ ] Project interactions
-  - [x] Likes
-  - [ ] Reports
-  - [ ] Comments
+- [x] Likes
+
+## Testing
+
+- [ ] Reports
+- [ ] TOS
+- [ ] Platform/sorted search
+- [ ] Project Pages
+  - [ ] Required extensions (Once implemented in SE!)
+  - [x] Thumbnail
+  - [x] Markdown Support
+- [x] API for user projects
+- [x] Account profiles
+
+## Post-Testing
+
+- [ ] Comments
 - [ ] Mobile/Small Screen Support
+- [ ] Support for (hosting) custom extensions (Once implemented in SE!)
 - [ ] Easy configuration and customizability
+- [ ] Multi-`.sb3` projects (for each platform)

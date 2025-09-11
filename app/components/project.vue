@@ -10,7 +10,10 @@ const props = defineProps<{ name: string; description: string; id: string }>();
       <nuxt-img src="/default-thumbnail.png" />
     </object>
     <h2>{{ props.name }}</h2>
-    <p v-if='props.description !== ""'>{{ props.description }}</p>
+    <MarkdownText
+      v-if='props.description !== ""'
+      :markdown="props.description"
+    />
   </NuxtLink>
 </template>
 <style>

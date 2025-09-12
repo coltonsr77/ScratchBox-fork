@@ -12,12 +12,12 @@ useHead({
 body.empty {
   display: grid;
   place-content: center;
-  background: #f9aa37;
+  background: var(--color-primary);
   height: 100vh;
 
   & * {
     text-align: center;
-    color: #fff;
+    color: var(--color-text);
   }
 }
 </style>

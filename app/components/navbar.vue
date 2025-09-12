@@ -94,6 +94,7 @@ nav {
 
   & > input {
     background: rgba(0, 0, 0, 0.25);
+    color: var(--color-text);
     border: none;
     margin: 0.5rem;
     padding: 0.5rem;

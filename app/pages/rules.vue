@@ -33,7 +33,7 @@ useHead({
     </p>
     <h2>No Bots</h2>
     <p>
-      ScratcgBox doesn't allow any bots to be used on the site. The API is free
+      ScratchBox doesn't allow any bots to be used on the site. The API is free
       to use for everyone and the only other reason anyone could possibly need a
       bot is to make spam projects/comments which we don't allow.
     </p>

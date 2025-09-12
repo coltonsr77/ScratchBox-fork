@@ -100,6 +100,10 @@ nav {
     padding: 0.5rem;
     border-radius: 0.5rem;
     width: 30rem;
+
+    &::placeholder {
+      color: var(--color-primary-text);
+    }
   }
 }
 </style>

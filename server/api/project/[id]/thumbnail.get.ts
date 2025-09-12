@@ -1,4 +1,5 @@
 import { createReadStream } from "fs";
+import fs from "fs/promises";
 
 export default defineEventHandler(async (event) => {
   const filePath = getFileLocally(
@@ -6,7 +7,9 @@ export default defineEventHandler(async (event) => {
     "/thumbnails",
   );
 
-  if (!filePath) {
+  try {
+    await fs.access(filePath, fs.constants.F_OK);
+  } catch {
     throw createError({
       statusCode: 404,
       statusMessage: "Thumbnail not found.",

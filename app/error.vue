@@ -5,9 +5,13 @@ const { error } = defineProps({
   error: Object as () => NuxtError,
 });
 
+const { currentTheme } = useTheme();
+
+const themeClass = computed(() => `theme-${currentTheme.value}`);
+
 useHead({
   bodyAttrs: {
-    class: "error-page",
+    class: ["error-page", themeClass],
   },
 });
 </script>

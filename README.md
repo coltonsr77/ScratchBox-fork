@@ -44,6 +44,10 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
 - [x] API for user projects
 - [x] Account profiles
 - [ ] Improved Error Handling
+- [ ] Commenting
+  - [x] Create comments
+  - [ ] Edit comments
+  - [ ] Delete comments (will likely be a moderation only feature)
 
 ## Post-Testing
 

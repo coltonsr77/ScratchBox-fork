@@ -21,9 +21,15 @@ export default defineEventHandler(async (event) => {
     likes: (await db.select({ count: count() }).from(schema.projectLikes).where(
       eq(schema.projectLikes.projectId, projectId),
     ))[0].count,
-    platforms:
-      (await db.select().from(schema.projectPlatforms).where(
-        eq(schema.projectPlatforms.projectId, projectId),
-      )).map((projectPlatform) => projectPlatform.platform),
+    platforms: (await db.select().from(schema.projectPlatforms).where(
+      eq(schema.projectPlatforms.projectId, projectId),
+    )).map((projectPlatform) => projectPlatform.platform),
+    comments: await db.select({
+      user: schema.projectComments.user,
+      createdAt: schema.projectComments.createdAt,
+      content: schema.projectComments.content,
+    }).from(schema.projectComments).where(
+      eq(schema.projectComments.projectId, projectId),
+    ),
   };
 });

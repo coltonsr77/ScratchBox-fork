@@ -11,18 +11,47 @@ const platformsMap = {
 };
 
 const projectId = useRoute().params.id;
-const { data: project } = await useFetch<
+
+const project = ref() as typeof fetchedProject;
+const { data: fetchedProject } = await useFetch<
   {
     id: string;
     name: string;
     description: string;
-    createdAt: Date;
+    createdAt: string;
     private: boolean;
     user: string;
     likes: number;
     platforms: typeof platformsMap[keyof typeof platformsMap][];
+    comments: { user: string; createdAt: string; content: string }[];
   }
 >(`/api/project/${projectId}`);
+watch(fetchedProject, (val) => project.value = val, { immediate: true });
+
+const sortedComments = computed(() => {
+  if (!project.value || !project.value.comments) return [];
+
+  return project.value.comments.toSorted((a, b) =>
+    new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  ).map((comment) => ({
+    ...comment,
+    timeSince: useFormatedTime(new Date(comment.createdAt)),
+  }));
+});
+const commentProfiles = ref<string[]>([]);
+watch(sortedComments, async () => {
+  if (sortedComments.value.length === 0) {
+    commentProfiles.value = [];
+    return;
+  }
+
+  commentProfiles.value = await Promise.all(
+    sortedComments.value.map((comment) =>
+      $fetch(`/api/user/${comment.user}/picture`).catch(() => null) // handle errors per request
+    ),
+  ) as string[];
+}, { immediate: true });
+
 const profilePicture = await $fetch(`/api/user/${project.value?.user}/picture`);
 const { data: liked } = await useFetch<boolean>(
   `/api/project/${projectId}/liked`,
@@ -78,6 +107,8 @@ const { handleFileInput: handleThumbnailFileInput, files: thumbnailFiles } =
     clearOldFiles: true,
   });
 
+const commentContent = ref("");
+
 const onLike = async () => {
   await $fetch(`/api/project/${projectId}/like`, {
     method: liked.value ? "DELETE" : "POST",
@@ -130,6 +161,20 @@ const save = async () => {
     },
   });
   editing.value = false;
+};
+
+const comment = async () => {
+  await $fetch(`/api/project/${projectId}/comment`, {
+    method: "POST",
+    headers: useRequestHeaders(["cookie"]),
+    body: commentContent.value,
+  });
+  project.value!.comments = [...project.value!.comments, {
+    user: user.username,
+    createdAt: new Date().toString(),
+    content: commentContent.value,
+  }];
+  commentContent.value = "";
 };
 
 onMounted(() => {
@@ -258,11 +303,105 @@ useHead({
       </button>
     </div>
   </div>
+  <div
+    class="comment-section"
+    v-if="user.loggedIn || project?.comments.length > 0"
+  >
+    <template v-if="user.loggedIn">
+      <textarea placeholder="Leave a comment!" v-model="commentContent" />
+      <button @click="comment">
+        <Icon name="ri:send-plane-fill" /> Comment
+      </button>
+    </template>
+    <div class="comment" v-for="(comment, i) in sortedComments">
+      <NuxtLink class="comment-profile" :to="`/user/${comment.user}`">
+        <img :src="commentProfiles[i]" />
+        {{ comment.user }}
+      </NuxtLink>
+      <MarkdownText :markdown="comment.content" />
+      <span>{{ comment.timeSince }}</span>
+    </div>
+  </div>
 </template>
 <style>
 body.project-page main {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.comment {
+  background: var(--color-background);
+  border-radius: 1rem;
+  padding: 1rem;
+  height: 12rem;
+  position: relative;
+
+  & .comment-profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5ch;
+    width: max-content;
+  }
+
+  & img {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 0.75rem;
+  }
+
+  & div {
+    margin-top: 1rem;
+  }
+
+  & span {
+    position: absolute;
+    opacity: 0.5;
+    right: 1rem;
+    bottom: 1rem;
+  }
+}
+
+.comment-section {
+  width: 61rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: var(--color-secondary-background);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  & textarea {
+    height: 10rem;
+    background: var(--color-background);
+    width: 100%;
+    border: none;
+    border-radius: 1rem;
+    resize: none;
+    padding: 1rem;
+  }
+
+  & button {
+    background: var(--color-primary);
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    right: 2rem;
+    top: 8rem;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 0.5ch;
+    cursor: pointer;
+
+    & *, & {
+      color: var(--color-primary-text);
+    }
+  }
 }
 
 .project-section {

@@ -42,6 +42,7 @@ body.theme-light {
   --color-primary: #f9aa37;
   --color-primary-text: #fff;
   --color-text: #000;
+  --color-blockquote: #d4d4d4;
 }
 
 body.theme-dark {
@@ -50,5 +51,6 @@ body.theme-dark {
   --color-primary: #d19847;
   --color-primary-text: #fff;
   --color-text: #ccc;
+  --color-blockquote: #333;
 }
 </style>

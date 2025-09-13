@@ -8,3 +8,19 @@ const renderedMarkdown = computed(() => md.render(props.markdown));
 <template>
   <div v-html="renderedMarkdown"></div>
 </template>
+<style>
+*:not(pre) > code, pre {
+  background: var(--color-secondary-background);
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+
+  &, & * {
+    font-family: monospace;
+  }
+}
+
+blockquote {
+  border-left: 0.33rem solid var(--color-blockquote);
+  padding-left: 0.5rem;
+}
+</style>

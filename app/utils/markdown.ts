@@ -5,16 +5,32 @@ import { full as emoji } from "markdown-it-emoji";
 const md = new MarkdownIt({
   html: false,
   linkify: true,
-}).use(emoji);
+});
+
+md.use(emoji);
 
 md.renderer.rules.html_block = () => "";
 md.renderer.rules.html_inline = () => "";
 
 const originalRender = md.render;
-md.render = (markdown, env) =>
-  sanitizeHtml(originalRender.call(md, markdown, env), {
-    allowedTags: ["em", "strong", "del", "a"],
-    allowedAttributes: { "a": ["href", "target"] },
+md.render = (markdown, env) => {
+  return sanitizeHtml(originalRender.call(md, markdown, env), {
+    allowedTags: [
+      "em",
+      "strong",
+      "s",
+      "a",
+      "pre",
+      "code",
+      "br",
+      "hr",
+      "ol",
+      "ul",
+      "li",
+      "blockquote",
+      "p",
+    ],
+    allowedAttributes: { "a": ["href", "target"], "code": ["class"] },
     transformTags: {
       "a": (tagName, attribs) => {
         if (attribs.href && attribs.href.startsWith("http")) {
@@ -25,5 +41,6 @@ md.render = (markdown, env) =>
       },
     },
   });
+};
 
 export default md;

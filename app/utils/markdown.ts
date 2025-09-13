@@ -1,10 +1,11 @@
 import MarkdownIt from "markdown-it";
 import sanitizeHtml from "sanitize-html";
+import { full as emoji } from "markdown-it-emoji";
 
 const md = new MarkdownIt({
   html: false,
   linkify: true,
-});
+}).use(emoji);
 
 md.renderer.rules.html_block = () => "";
 md.renderer.rules.html_inline = () => "";

@@ -31,6 +31,8 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
 
 - [ ] Moderation
   - [ ] Reports
+    - [ ] Comments
+    - [ ] Projects
   - [ ] Admin/Mod dashboard
   - [ ] Easy way to make people mods/admins
   - [ ] Allow mods to edit project info
@@ -43,7 +45,7 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
   - [x] Markdown Support
 - [x] API for user projects
 - [x] Account profiles
-- [ ] Improved Error Handling
+- [x] Improved Error Handling
 - [ ] Commenting
   - [x] Create comments
   - [ ] Edit comments

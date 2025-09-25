@@ -17,7 +17,7 @@ body.empty {
 
   & * {
     text-align: center;
-    color: var(--color-text);
+    color: var(--color-primary-text);
   }
 }
 </style>

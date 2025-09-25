@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
       {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        sameSite: "lax",
         maxAge: 1209600, // 14 days
       },
     );

@@ -38,28 +38,16 @@ useHead({
     />
   </div>
   <div class="page-controls">
-    <button
+    <NuxtLink
       v-if='Number(route.query.p || "1") > 1'
-      @click='
-        navigateTo({
-          path: "/explore",
-          query: { p: Number(route.query.p) - 1 },
-        })
-      '
+      :to='`/explore?p=${Number(route.query.p || "1") - 1}`'
     >
       Back
-    </button>
+    </NuxtLink>
     <p>{{ route.query.p || "1" }}</p>
-    <button
-      @click='
-        navigateTo({
-          path: "/explore",
-          query: { p: Number(route.query.p || "1") + 1 },
-        })
-      '
-    >
+    <NuxtLink :to='`/explore?p=${Number(route.query.p || "1") + 1}`'>
       Next
-    </button>
+    </NuxtLink>
   </div>
 </template>
 <style>
@@ -83,7 +71,7 @@ body.explore-page main {
   align-items: center;
   font-weight: bold;
 
-  & button {
+  & a {
     background: var(--color-primary);
     border: none;
     color: var(--color-primary-text);
@@ -91,6 +79,7 @@ body.explore-page main {
     border-radius: 0.5rem;
     cursor: pointer;
     font-weight: bold;
+    text-decoration: none;
   }
 }
 </style>

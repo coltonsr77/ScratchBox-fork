@@ -46,6 +46,11 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
 - [x] API for user projects
 - [x] Account profiles
 - [x] Improved Error Handling
+- [ ] Editor (@dogo6647 is working on the UI)
+- [ ] Homebrew App Store Integrations
+  - [ ] Wii U Homebrew App Store
+  - [ ] Switch Homebrew App Store
+  - [ ] Uni-store
 - [ ] Commenting
   - [x] Create comments
   - [ ] Edit comments
@@ -57,3 +62,4 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
 - [ ] Support for (hosting) custom extensions (Once implemented in SE!)
 - [ ] Easy configuration and customizability
 - [ ] Multi-`.sb3` projects (for each platform)
+- [ ] Desktop App

@@ -39,9 +39,16 @@ export default defineEventHandler(async (event) => {
     name: file.name.slice(0, -4),
     description: "",
     createdAt: new Date(),
+    lastUpdated: new Date(),
     private: true,
     user: (decoded as { username: string }).username,
   });
+
+  await db.update(schema.unistoreData).set({
+    revision: (await db.select().from(schema.unistoreData))[0].revision + 1,
+  });
+
+  await regenTex3DS();
 
   return projectId;
 });

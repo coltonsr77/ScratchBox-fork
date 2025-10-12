@@ -10,6 +10,7 @@ export const projects = sqliteTable("projects", {
   name: text("name").notNull(),
   description: text("description").notNull(),
   createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+  lastUpdated: integer("last_updated", { mode: "timestamp" }).notNull(),
   private: integer("private", { mode: "boolean" }).notNull(),
   user: text("user").notNull(),
 });
@@ -34,4 +35,8 @@ export const projectComments = sqliteTable("project_comments", {
   user: text("user").notNull(),
   content: text("body").notNull(),
   createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+});
+
+export const unistoreData = sqliteTable("unistore_data", {
+  revision: integer("revision").notNull(),
 });

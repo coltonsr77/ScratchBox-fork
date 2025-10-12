@@ -50,7 +50,7 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
 - [ ] Homebrew App Store Integrations
   - [ ] Wii U Homebrew App Store
   - [ ] Switch Homebrew App Store
-  - [ ] Uni-store
+  - [x] Unistore
 - [ ] Commenting
   - [x] Create comments
   - [ ] Edit comments

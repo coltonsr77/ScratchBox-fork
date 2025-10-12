@@ -61,9 +61,14 @@ export default defineEventHandler(async (event) => {
     description: body.description,
     name: body.name,
     private: body.private,
+    lastUpdated: new Date(),
   }).where(
     eq(schema.projects.id, projectId),
   );
+
+  await db.update(schema.unistoreData).set({
+    revision: (await db.select().from(schema.unistoreData))[0].revision + 1,
+  });
 
   const allPlatforms = [
     "scratch",
@@ -157,4 +162,6 @@ export default defineEventHandler(async (event) => {
     projectId,
     "/thumbnails",
   );
+
+  await regenTex3DS();
 });

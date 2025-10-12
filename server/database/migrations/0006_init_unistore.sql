@@ -4,4 +4,4 @@ CREATE TABLE `unistore_data` (
 --> statement-breakpoint
 INSERT INTO `unistore_data` VALUES(0)
 --> statement-breakpoint
-ALTER TABLE `projects` ADD `last_updated` integer NOT NULL;
+ALTER TABLE `projects` ADD `last_updated` integer NOT NULL DEFAULT (CURRENT_TIMESTAMP);

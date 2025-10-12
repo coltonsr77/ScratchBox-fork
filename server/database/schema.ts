@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import {
   integer,
   primaryKey,
@@ -34,7 +35,9 @@ export const projectComments = sqliteTable("project_comments", {
   projectId: text("project_id").notNull().references(() => projects.id),
   user: text("user").notNull(),
   content: text("body").notNull(),
-  createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+  createdAt: integer("created_at", { mode: "timestamp" }).default(
+    sql`CURRENT_TIMESTAMP`,
+  ).notNull(),
 });
 
 export const unistoreData = sqliteTable("unistore_data", {

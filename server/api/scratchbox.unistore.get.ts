@@ -1,6 +1,7 @@
 import { db } from "../utils/drizzle";
 import * as schema from "../database/schema";
 import { and, eq, not } from "drizzle-orm";
+import fs from "node:fs";
 
 export default defineEventHandler(async (event) => {
   let i = 0;
@@ -27,8 +28,9 @@ export default defineEventHandler(async (event) => {
       ),
     )).map(
       ({ projects: project }) => {
-        const hasThumbnail =
-          getFileLocally(project.id + ".png", "/thumbnails") != null;
+        const hasThumbnail = fs.existsSync(
+          getFileLocally(project.id + ".png", "/thumbnails"),
+        );
         const content: { [key: string]: Object } = {
           info: {
             title: project.name,

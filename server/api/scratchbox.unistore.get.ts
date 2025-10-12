@@ -33,8 +33,10 @@ export default defineEventHandler(async (event) => {
           info: {
             title: project.name,
             author: project.user,
-            version: project.lastUpdated.getTime() -
-              project.createdAt.getTime(), // Calculate version based on when it was updated
+            version: JSON.stringify(
+              project.lastUpdated.getTime() -
+                project.createdAt.getTime(),
+            ), // Calculate version based on when it was updated
             category: ["Games"],
             console: ["3DS"],
             description: project.description,

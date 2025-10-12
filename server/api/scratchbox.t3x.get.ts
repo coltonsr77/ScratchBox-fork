@@ -20,7 +20,6 @@ export default defineEventHandler(async (event) => {
 
     return sendStream(event, createReadStream(filePath));
   } catch {
-    console.log("hi!");
     throw createError({
       statusCode: 500,
       statusMessage: "Internal server error",

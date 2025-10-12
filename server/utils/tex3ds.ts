@@ -19,7 +19,7 @@ export const regenTex3DS = async () => {
     )).reduce(
       (a, { projects: project }) =>
         a +
-        (getFileLocally(project.id + ".png", "/thumbnails") != null
+        (fs.existsSync(getFileLocally(project.id + ".png", "/thumbnails"))
           ? path.join(
             process.env.MOUNT as string,
             "thumbnails",

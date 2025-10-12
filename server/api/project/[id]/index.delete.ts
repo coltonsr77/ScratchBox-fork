@@ -1,7 +1,7 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { db } from "../../../utils/drizzle";
 import * as schema from "../../../database/schema";
-import { eq } from "drizzle-orm";
+import { and, eq, not } from "drizzle-orm";
 
 export default defineEventHandler(async (event) => {
   const token = getCookie(event, "SB_TOKEN");
@@ -35,6 +35,23 @@ export default defineEventHandler(async (event) => {
     });
   }
 
+  if (
+    (await db.select().from(schema.projects).innerJoin(
+      schema.projectPlatforms,
+      eq(schema.projects.id, schema.projectPlatforms.projectId),
+    ).where(
+      and(
+        eq(schema.projects.id, project.id),
+        eq(schema.projectPlatforms.platform, "3ds"),
+        not(schema.projects.private),
+      ),
+    )).length > 0
+  ) {
+    await db.update(schema.unistoreData).set({
+      revision: (await db.select().from(schema.unistoreData))[0].revision + 1,
+    });
+  }
+
   await deleteFile(projectId + ".sb3", "/projects");
   await db.delete(schema.projectLikes).where(
     eq(schema.projectLikes.projectId, projectId),
@@ -45,7 +62,5 @@ export default defineEventHandler(async (event) => {
 
   await db.delete(schema.projects).where(eq(schema.projects.id, projectId));
 
-  await db.update(schema.unistoreData).set({
-    revision: (await db.select().from(schema.unistoreData))[0].revision + 1,
-  });
+  await regenTex3DS();
 });

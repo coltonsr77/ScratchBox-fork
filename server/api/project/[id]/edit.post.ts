@@ -1,7 +1,7 @@
 import { db } from "../../../utils/drizzle";
 import * as schema from "../../../database/schema";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { and, eq } from "drizzle-orm";
+import { and, eq, not } from "drizzle-orm";
 import { ServerFile } from "nuxt-file-storage";
 import sharp from "sharp";
 
@@ -66,10 +66,6 @@ export default defineEventHandler(async (event) => {
     eq(schema.projects.id, projectId),
   );
 
-  await db.update(schema.unistoreData).set({
-    revision: (await db.select().from(schema.unistoreData))[0].revision + 1,
-  });
-
   const allPlatforms = [
     "scratch",
     "turbowarp",
@@ -132,6 +128,23 @@ export default defineEventHandler(async (event) => {
     }
 
     await storeFileLocally(body.file, projectId, "/projects");
+  }
+
+  if (
+    (await db.select().from(schema.projects).innerJoin(
+      schema.projectPlatforms,
+      eq(schema.projects.id, schema.projectPlatforms.projectId),
+    ).where(
+      and(
+        eq(schema.projects.id, project.id),
+        eq(schema.projectPlatforms.platform, "3ds"),
+        not(schema.projects.private),
+      ),
+    )).length > 0
+  ) {
+    await db.update(schema.unistoreData).set({
+      revision: (await db.select().from(schema.unistoreData))[0].revision + 1,
+    });
   }
 
   if (!body.thumbnail) return;

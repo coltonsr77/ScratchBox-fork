@@ -240,7 +240,10 @@ useHead({
       </p>
       <iframe
         v-if='platforms.includes("turbowarp")'
-        :src="`https://turbowarp.org/embed?project_url=${useRequestURL().host}/api/project/${projectId}/download`"
+        :src="`https://turbowarp.org/embed?project_url=${useRequestURL().host}/api/project/${projectId}/download&addons=gamepad,pause`"
+        allowtransparency="true"
+        scrolling="no"
+        allowfullscreen="true"
       />
       <object
         :data="`/api/project/${projectId}/thumbnail`"

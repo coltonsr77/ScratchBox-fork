@@ -44,4 +44,8 @@ export default defineEventHandler(async (event) => {
   );
 
   await db.delete(schema.projects).where(eq(schema.projects.id, projectId));
+
+  await db.update(schema.unistoreData).set({
+    revision: (await db.select().from(schema.unistoreData))[0].revision + 1,
+  });
 });

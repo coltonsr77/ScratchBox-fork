@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
         not(schema.projects.private),
       ),
     )).map(
-      ({ projects: project }, i) => {
+      ({ projects: project }) => {
         const hasThumbnail =
           getFileLocally(project.id + ".png", "/thumbnails") != null;
         const content: { [key: string]: Object } = {

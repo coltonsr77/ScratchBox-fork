@@ -36,7 +36,7 @@ export const projectComments = sqliteTable("project_comments", {
   user: text("user").notNull(),
   content: text("body").notNull(),
   createdAt: integer("created_at", { mode: "timestamp" }).default(
-    sql`CURRENT_TIMESTAMP`,
+    sql`(strftime('%s', 'now'))`,
   ).notNull(),
 });
 

@@ -39,7 +39,9 @@ export default defineEventHandler(async (event) => {
             ), // Calculate version based on when it was updated
             category: ["Games"],
             console: ["3DS"],
-            description: project.description,
+            description: project.description.length > 150
+              ? project.description.slice(0, 150) + "..."
+              : project.description,
             license: "", // I don't enforce any licenses on ScratchBox, if a project is licensed it should be in the description
             icon_index: hasThumbnail ? i : -1,
             last_updated: project.lastUpdated.toLocaleString("en-US", {

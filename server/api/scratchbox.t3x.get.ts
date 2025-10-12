@@ -19,7 +19,8 @@ export default defineEventHandler(async (event) => {
     setHeader(event, "Access-Control-Allow-Origin", "*");
 
     return sendStream(event, createReadStream(filePath));
-  } catch {
+  } catch (e) {
+    console.error(e);
     throw createError({
       statusCode: 500,
       statusMessage: "Internal server error",

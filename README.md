@@ -29,6 +29,7 @@ A WIP project hosting/distribution platform for Scratch Everywhere!
 
 ## Testing
 
+- [ ] Actually check if the file is a Scratch project.
 - [ ] Moderation
   - [ ] Reports
     - [ ] Comments

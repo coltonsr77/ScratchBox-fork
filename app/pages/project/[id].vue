@@ -8,11 +8,13 @@ const platformsMap = {
   "wii": "Wii",
   "gamecube": "GameCube",
   "vita": "Vita",
+  "ps4": "PS4",
+  "ds": "DS",
+  "wasm": "WASM (SE! Web)",
 };
 
 const projectId = useRoute().params.id;
 
-const project = ref() as typeof fetchedProject;
 const { data: fetchedProject } = await useFetch<
   {
     id: string;
@@ -22,10 +24,11 @@ const { data: fetchedProject } = await useFetch<
     private: boolean;
     user: string;
     likes: number;
-    platforms: typeof platformsMap[keyof typeof platformsMap][];
+    platforms: (keyof typeof platformsMap)[];
     comments: { user: string; createdAt: string; content: string }[];
   }
 >(`/api/project/${projectId}`);
+const project = ref() as typeof fetchedProject;
 watch(fetchedProject, (val) => project.value = val, { immediate: true });
 
 const sortedComments = computed(() => {
@@ -82,7 +85,7 @@ watch(project, (newProject) => {
 }, { immediate: true });
 
 const platforms = reactive(
-  (project.value?.platforms as (keyof typeof platformsMap)[])
+  project.value?.platforms
     .toSorted((a, b) =>
       Object.keys(platformsMap).indexOf(a) -
       Object.keys(platformsMap).indexOf(b)
@@ -239,7 +242,14 @@ useHead({
         </template>
       </p>
       <iframe
-        v-if='platforms.includes("turbowarp")'
+        v-if='platforms.includes("wasm")'
+        :src="`https://scratcheverywhere.github.io/ScratchEverywhere/?project_url=${useRequestURL().host}/api/project/${projectId}/download`"
+        allowtransparency="true"
+        scrolling="no"
+        allowfullscreen="true"
+      />
+      <iframe
+        v-else-if='platforms.includes("turbowarp")'
         :src="`https://turbowarp.org/embed?project_url=${useRequestURL().host}/api/project/${projectId}/download&addons=gamepad,pause`"
         allowtransparency="true"
         scrolling="no"

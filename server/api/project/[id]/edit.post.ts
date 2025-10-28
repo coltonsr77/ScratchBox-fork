@@ -52,6 +52,9 @@ export default defineEventHandler(async (event) => {
         | "wii"
         | "gamecube"
         | "vita"
+        | "wasm"
+        | "ds"
+        | "ps4"
       )[];
       private: boolean;
     }
@@ -75,6 +78,9 @@ export default defineEventHandler(async (event) => {
     "wii",
     "gamecube",
     "vita",
+    "ps4",
+    "ds",
+    "wasm",
   ] as (
     | "scratch"
     | "turbowarp"
@@ -84,6 +90,9 @@ export default defineEventHandler(async (event) => {
     | "wii"
     | "gamecube"
     | "vita"
+    | "ps4"
+    | "ds"
+    | "wasm"
   )[];
 
   const currentPlatforms = (await db.select({

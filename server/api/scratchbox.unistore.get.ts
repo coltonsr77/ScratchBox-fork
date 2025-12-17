@@ -31,6 +31,21 @@ export default defineEventHandler(async (event) => {
         const hasThumbnail = fs.existsSync(
           getFileLocally(project.id + ".png", "/thumbnails"),
         );
+
+        const dateParts = new Map(
+          new Intl.DateTimeFormat("en-US", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false,
+            timeZone: "UTC",
+          }).formatToParts(project.lastUpdated).map(
+            (part) => [part.type, part.value],
+          ),
+        );
+
         const content: { [key: string]: Object } = {
           info: {
             title: project.name,
@@ -46,15 +61,9 @@ export default defineEventHandler(async (event) => {
               : project.description,
             license: "", // I don't enforce any licenses on ScratchBox, if a project is licensed it should be in the description
             icon_index: hasThumbnail ? i : -1,
-            last_updated: project.lastUpdated.toLocaleString("en-US", {
-              year: "numeric",
-              month: "2-digit",
-              day: "2-digit",
-              hour: "2-digit",
-              minute: "2-digit",
-              hour12: false,
-              timeZone: "UTC",
-            }).replace(", ", " at ") + " (UTC)",
+            last_updated: `${dateParts.get("year")}-${dateParts.get("month")}-${
+              dateParts.get("day")
+            } at ${dateParts.get("hour")}:${dateParts.get("minute")} (UTC)`,
           },
         };
         content[`Download ${project.name}.sb3`] = [{

@@ -1,6 +1,6 @@
 import { db } from "../utils/drizzle";
 import * as schema from "../database/schema";
-import { and, eq, not } from "drizzle-orm";
+import { and, count, eq, not } from "drizzle-orm";
 import fs from "node:fs";
 
 export default defineEventHandler(async (event) => {
@@ -64,6 +64,11 @@ export default defineEventHandler(async (event) => {
             last_updated: `${dateParts.get("year")}-${dateParts.get("month")}-${
               dateParts.get("day")
             } at ${dateParts.get("hour")}:${dateParts.get("minute")} (UTC)`,
+            stars: db
+              .select({ count: count() })
+              .from(schema.projectLikes)
+              .where(eq(schema.projectLikes.projectId, project.id))
+              .get()?.count,
           },
         };
         content[`Download ${project.name}.sb3`] = [{

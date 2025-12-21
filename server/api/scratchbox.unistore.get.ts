@@ -17,6 +17,7 @@ export default defineEventHandler(async (event) => {
       sheetURL: `https://${getRequestHost(event)}/api/scratchbox.t3x`,
       version: 3,
       revision: (await db.select().from(schema.unistoreData))[0].revision,
+      url: `https://${getRequestHost(event)}/api/scratchbox.unistore`,
     },
     storeContent: (await db.select().from(schema.projects).innerJoin(
       schema.projectPlatforms,

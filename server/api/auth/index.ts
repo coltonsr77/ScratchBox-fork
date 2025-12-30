@@ -27,6 +27,9 @@ export default defineEventHandler(async (event) => {
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
         maxAge: 1209600, // 14 days
+        domain: process.env.NODE_ENV === "production"
+          ? useRequestURL().hostname
+          : undefined,
       },
     );
   }

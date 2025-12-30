@@ -16,6 +16,8 @@ export default defineEventHandler(async (event) => {
     });
   }
 
+  setHeader(event, "Access-Control-Allow-Origin", "*");
+
   return {
     ...project,
     likes: (await db.select({ count: count() }).from(schema.projectLikes).where(

@@ -60,6 +60,17 @@ export default defineEventHandler(async (event) => {
     }
   >(event);
 
+  setHeaders(
+    event,
+    {
+      "Access-Control-Allow-Origin": process.env.NODE_ENV === "production"
+        ? "https://editor." + useRequestURL().hostname
+        : "http://localhost:8601",
+      "Access-Control-Allow-Credentials": true,
+      "Access-Control-Allow-Headers": "Content-Type",
+    },
+  );
+
   await db.update(schema.projects).set({
     description: body.description,
     name: body.name,
